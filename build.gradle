@@ -1,0 +1,6 @@
+plugins {
+    id 'java'
+}
+
+group 'de.daver.buun'
+version '1.0.0-alpha'
