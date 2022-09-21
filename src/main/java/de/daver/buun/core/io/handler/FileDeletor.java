@@ -1,19 +1,18 @@
 package de.daver.buun.core.io.handler;
 
 import de.daver.buun.core.Result;
+import de.daver.buun.core.io.FileResult;
 
 import java.io.File;
 
-public class FileDeletor {
+public class FileDeletor extends FileExecutor{
 
-    private final File file;
-
-    protected FileDeletor(File file){
-        this.file = file;
+    public FileDeletor(File file){
+        super(file);
     }
 
-    public Result<File> delete(){
-        //TODO Delete all
+    @Override
+    public FileResult execute() {
         return null;
     }
 

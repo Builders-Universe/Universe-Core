@@ -1,24 +1,21 @@
 package de.daver.buun.core.io.handler;
 
-import de.daver.buun.core.Result;
 import de.daver.buun.core.exception.ExceptionHandler;
 import de.daver.buun.core.io.FileResult;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.IOException;
 
-public class FileCopier {
+public class FileCopier extends FileExecutor{
 
-    private final File source;
     private File targetDir;
     private String copyName;
     private boolean deleteSource;
     private boolean overwriteTarget;
 
     protected FileCopier(File file){
-        this.source = file;
+        super(file);
         this.copyName = null;
     }
 
@@ -30,6 +27,25 @@ public class FileCopier {
     public FileCopier target(File dir){
         this.targetDir = dir;
         return this;
+    }
+
+    public FileCopier target(String dirPath){
+        return target(new File(dirPath));
+    }
+
+    public FileCopier path(File dir, String name){
+        name(name);
+        return target(dir);
+    }
+
+    public FileCopier path(String path){
+        return path(path, "\\");
+    }
+
+    public FileCopier path(String path, String separator){
+        String[] split = path.split(separator);
+        name(split[split.length - 1]);
+        return target(path.substring(0, path.length() - separator.length() - this.copyName.length()));
     }
 
     public FileCopier removeSource(){
@@ -49,8 +65,9 @@ public class FileCopier {
     //code return reason
     //1    object existed
     //
-    public FileResult copy(){
-        File target = new File(targetDir, source.getName());
+    @Override
+    public FileResult execute(){
+        File target = new File(targetDir, getFile().getName());
         if(!overwriteTarget && target.exists()) return new FileResult(target, FileResult.TARGET_EXISTS);
         return null;
     }
@@ -71,8 +88,8 @@ public class FileCopier {
 
     private void rCopyContents(File sourceFile, File targetDir){
         final File[] newFile = new File[1];
-        new FileCreator(new File(targetDir, sourceFile.getName())).create()
-                .ifPresent(fileResult -> newFile[0] = fileResult.get());
+        new FileCreator(new File(targetDir, sourceFile.getName())).execute()
+                .ifPresent(file -> newFile[0] = file);
         if(!sourceFile.isDirectory()) writeFile(sourceFile, newFile[0]);
         File[] contents = sourceFile.listFiles();
         if(contents == null) return;

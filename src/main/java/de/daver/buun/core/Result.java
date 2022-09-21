@@ -2,7 +2,7 @@ package de.daver.buun.core;
 
 import java.util.function.Consumer;
 
-public class Result <T>{
+public class Result <T> {
 
     private final T value;
     private final int code;
@@ -24,13 +24,14 @@ public class Result <T>{
         return this.value != null;
     }
 
-    public Result<T> ifPresent(Consumer<Result<T>> consumer){
-        if(isPresent()) consumer.accept(this);
+    public Result<T> ifPresent(Consumer<T> consumer){
+        if(isPresent()) consumer.accept(this.value);
         return this;
     }
 
-    public Result<T> notPresent(Consumer<Result<T>>  consumer) {
-        if(!isPresent()) consumer.accept(this);
+    public Result<T> elseCase(Runnable runnable){
+        if(!isPresent()) runnable.run();
         return this;
+
     }
 }

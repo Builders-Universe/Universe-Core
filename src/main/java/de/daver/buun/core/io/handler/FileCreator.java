@@ -1,28 +1,24 @@
 package de.daver.buun.core.io.handler;
 
-
-import de.daver.buun.core.Result;
 import de.daver.buun.core.io.FileResult;
 
 import java.io.File;
 
-public class FileCreator {
+public class FileCreator extends FileExecutor{
 
-    private final File file;
     private boolean overwrite;
 
-    protected FileCreator(File file){
-        this.file = file;
+    public FileCreator(File file){
+        super(file);
+    }
+
+    @Override
+    public FileResult execute() {
+        return null;
     }
 
     public FileCreator overwrite(boolean overwrite){
         this.overwrite = overwrite;
         return this;
     }
-
-    public FileResult create() {
-        //TODO Create the file
-        return null;
-    }
-
 }

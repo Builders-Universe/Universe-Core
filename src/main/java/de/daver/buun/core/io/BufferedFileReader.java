@@ -7,8 +7,11 @@ import java.util.function.Consumer;
 
 public class BufferedFileReader extends BufferedReader {
 
+    private final File file;
+
     public BufferedFileReader(File file) throws IOException {
         super(new FileReader(file));
+        this.file = file;
     }
 
     public List<String> readLines() throws IOException{
@@ -20,5 +23,9 @@ public class BufferedFileReader extends BufferedReader {
     public void readLines(Consumer<String> lineConsumer) throws IOException{
         String line;
         while((line = readLine()) != null) lineConsumer.accept(line);
+    }
+
+    public File getFile(){
+        return this.file;
     }
 }

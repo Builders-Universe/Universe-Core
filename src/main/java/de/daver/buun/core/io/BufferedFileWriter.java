@@ -7,8 +7,12 @@ import java.util.List;
 public class BufferedFileWriter extends BufferedWriter {
 
 
-    public BufferedFileWriter(File file) throws IOException {
+    public BufferedFileWriter(File file, boolean append) throws IOException {
         super(new FileWriter(file));
+    }
+
+    public BufferedFileWriter(File file) throws  IOException {
+        this(file, false);
     }
 
     public void writeLines(List<String> lines) throws IOException{
