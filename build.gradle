@@ -1,6 +1,19 @@
 plugins {
     id 'java'
+    id 'maven-publish'
 }
 
 group 'de.daver.buun'
 version '1.0.0-alpha'
+
+publishing{
+    publications{
+        mavenJava(MavenPublication){
+            groupId = 'de.daver.buun'
+            artifactId = 'core'
+            version = '1.0.0-alpha'
+
+            from components.java
+        }
+    }
+}

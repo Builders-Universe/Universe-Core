@@ -1,6 +1,6 @@
 package de.daver.buun.core.io.handler;
 
-import de.daver.buun.core.Result;
+import de.daver.buun.core.util.Result;
 import de.daver.buun.core.io.archiver.FileCompressor;
 
 import java.io.File;

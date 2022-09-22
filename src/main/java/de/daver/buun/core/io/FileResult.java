@@ -1,6 +1,6 @@
 package de.daver.buun.core.io;
 
-import de.daver.buun.core.Result;
+import de.daver.buun.core.util.Result;
 import de.daver.buun.core.io.handler.FileHandler;
 
 import java.io.File;

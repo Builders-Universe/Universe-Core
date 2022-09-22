@@ -1,4 +1,4 @@
-package de.daver.buun.core;
+package de.daver.buun.core.util;
 
 import java.util.function.Consumer;
 
