@@ -5,6 +5,7 @@ import de.daver.buun.core.sql.connector.DatabaseConnector;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
@@ -46,7 +47,7 @@ public class Database {
     }
 
     public <T> T executeQuery(String sql, Function<ResultSet, T> resultTransformer){
-        return new ExceptionHandler<T, Exception, AutoCloseable>().print(true)
+        return new ExceptionHandler<T, SQLException, AutoCloseable>().print(true)
                 .accept(() -> resultTransformer.apply(connection.prepareStatement(sql).executeQuery()));
     }
 
