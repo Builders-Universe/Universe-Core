@@ -1,14 +1,6 @@
 
 _
 /src/main/java/de/daver/buun/core/log/Level.java,f\b\fb4cb082abe6f768ab1266f9a463c608246a3221
-k
-;src/main/java/de/daver/buun/core/formatter/ColumnTypes.java,e\3\e3e6a6a2a6e5307eeba5b85f150e994bd5b28c4b
-i
-9src/main/java/de/daver/buun/core/formatter/Formatter.java,4\4\44ef29a8f425b4fb7e8cbe49e2527f75686fdb14
-n
->src/main/java/de/daver/buun/core/formatter/PasteFormatter.java,6\a\6a4657cf9435e78878991bb8e0f7d21eb3321c85
-w
-G.idea/sonarlint/issuestore/b/a/babbaae638f525127dd4007e6514dabde53b5411,4\1\418785902085bb342b1a9a859043e7045c25ccf8
 w
 G.idea/sonarlint/issuestore/c/6/c63efb5de938cc2ae862589d66713fe19361a388,b\1\b10c2ff6ffdb2c7576e80af812f64855d7fc5f5a
 \
@@ -27,8 +19,6 @@ k
 ;src/main/java/de/daver/buun/core/io/handler/FileReader.java,c\8\c85e488f6a4a45ff9dc4eac9ffddc5da2b056145
 k
 ;src/main/java/de/daver/buun/core/io/handler/FileWriter.java,9\e\9eea5653a13abc98206122ad7af9d380ed31e6b6
-h
-8src/main/java/de/daver/buun/core/io/config/JSONFile.java,5\4\54d6ddd31bb13ac42b5404762acfbbf309d6b186
 n
 >src/main/java/de/daver/buun/core/io/config/PropertiesFile.java,6\a\6a9be293ccb17746f9d3a3b0e731cd381038dca0
 g
