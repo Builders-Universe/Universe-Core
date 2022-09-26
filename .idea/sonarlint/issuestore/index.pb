@@ -1,8 +1,6 @@
 
 _
 /src/main/java/de/daver/buun/core/log/Level.java,f\b\fb4cb082abe6f768ab1266f9a463c608246a3221
-w
-G.idea/sonarlint/issuestore/c/6/c63efb5de938cc2ae862589d66713fe19361a388,b\1\b10c2ff6ffdb2c7576e80af812f64855d7fc5f5a
 \
 ,.idea/inspectionProfiles/Project_Default.xml,4\9\496a238a6afa168dbaf6efd37bb459331589579c
 k
@@ -25,3 +23,11 @@ g
 7src/main/java/de/daver/buun/core/io/config/YMLFile.java,8\6\8652221733692b526fe9864162298d5acb312e71
 p
 @src/main/java/de/daver/buun/core/exception/ExceptionHandler.java,5\3\532006196e783b56c81ed781fb7725338c978839
+f
+6src/main/java/de/daver/buun/core/test/TestCommand.java,5\4\54571057a5676105dc0a8ede32c9389a64c13ecc
+<
+build.gradle,f\0\f07866736216be0ee2aba49e392191aeae700a35
+k
+;src/main/java/de/daver/buun/core/command/CommandChecks.java,1\6\163fb71c25d9892c17fd0d3f774497791c1f694b
+f
+6src/main/java/de/daver/buun/core/task/TaskManager.java,9\f\9f9359ea759bef80e15259cfc2f4c13be5052373

@@ -12,6 +12,7 @@ import de.daver.buun.core.lang.LanguageManager;
 import de.daver.buun.core.log.Logger;
 import de.daver.buun.core.sql.Database;
 import de.daver.buun.core.sql.connector.SQLiteDatabaseConnector;
+import de.daver.buun.core.task.DatabaseTaskManager;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -128,6 +129,11 @@ public class TestClass {
 
                 })
                 .createSubCommand("sub", command -> System.out.println());
+    }
+
+    public void testTask(){
+        DatabaseTaskManager manager = new DatabaseTaskManager(null, null);
+        manager.
     }
 
 
