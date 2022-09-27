@@ -75,7 +75,7 @@ public class FileCopier extends FileExecutor{
 
     private int writeFile(File source, File destination){
         return new ExceptionHandler<Integer, Exception, AutoCloseable>()
-                .handleReturn(0) //TODO passendere COde finden
+                .handleReturn(0) //TODO passendere Code finden
                 .accept(() -> {
                     FileInputStream fileIn = new FileInputStream(source);
                     FileOutputStream fileOut = new FileOutputStream(destination);

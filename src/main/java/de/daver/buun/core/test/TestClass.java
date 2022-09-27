@@ -1,9 +1,5 @@
 package de.daver.buun.core.test;
 
-import de.daver.buun.core.command.Command;
-import de.daver.buun.core.command.CommandArguments;
-import de.daver.buun.core.command.CommandChecks;
-import de.daver.buun.core.command.CommandMeta;
 import de.daver.buun.core.exception.ExceptionHandler;
 import de.daver.buun.core.io.config.ConfigFile;
 import de.daver.buun.core.io.config.PropertiesFile;
@@ -13,6 +9,7 @@ import de.daver.buun.core.log.Logger;
 import de.daver.buun.core.sql.Database;
 import de.daver.buun.core.sql.connector.SQLiteDatabaseConnector;
 import de.daver.buun.core.task.DatabaseTaskManager;
+import de.daver.buun.core.util.StringFormatter;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -23,6 +20,14 @@ import java.util.List;
 import java.util.Locale;
 
 public class TestClass {
+
+    public static void main(String[] args) {
+        System.out.println(new StringFormatter("   fuss el")
+                .trim()
+                .capitalize()
+                .format(s -> "Mein Cock")
+                .get());
+    }
 
     public void test1(){
         String text = new ExceptionHandler<String, IOException, BufferedReader>()

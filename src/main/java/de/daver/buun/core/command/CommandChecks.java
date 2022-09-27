@@ -64,6 +64,7 @@ public class CommandChecks {
         return this;
     }
 
+    //TODO REFACTOR
     public CommandChecks checkCharacters(boolean enable){
         if(!enable){
             checks.remove(CHARACTERS);

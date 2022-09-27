@@ -1,6 +1,6 @@
 package de.daver.buun.core.util;
 
-import java.util.function.Function;
+import java.util.Locale;
 import java.util.function.UnaryOperator;
 
 public class StringFormatter {
@@ -16,7 +16,7 @@ public class StringFormatter {
     }
 
     public StringFormatter removeLast(int steps){
-        return format(s -> s.substring(0, string.length() - steps));
+        return format(s -> s.substring(0, s.length() - steps));
     }
 
     public StringFormatter substring(int begin){
@@ -25,6 +25,14 @@ public class StringFormatter {
 
     public StringFormatter substring(int begin, int end){
         return format(s -> s.substring(begin, end));
+    }
+
+    public StringFormatter capitalize(){
+        return format(s -> s.substring(0, 1).toUpperCase() + s.substring(1));
+    }
+
+    public StringFormatter trim(){
+        return format(String::trim);
     }
 
     public StringFormatter format(UnaryOperator<String> stringOperator){

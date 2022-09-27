@@ -66,8 +66,6 @@ public class Command {
         return null;
     }
 
-
-
     public CommandMeta getMeta(){
         return this.meta;
     }
