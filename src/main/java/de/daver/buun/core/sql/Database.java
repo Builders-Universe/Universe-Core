@@ -2,6 +2,7 @@ package de.daver.buun.core.sql;
 
 import de.daver.buun.core.exception.ExceptionHandler;
 import de.daver.buun.core.sql.connector.DatabaseConnector;
+import de.daver.buun.core.sql.function.SQLResultTransformer;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -46,9 +47,9 @@ public class Database {
                 .run(() -> connection.prepareStatement(sql).execute());
     }
 
-    public <T> T executeQuery(String sql, Function<ResultSet, T> resultTransformer){
+    public <T> T executeQuery(String sql, SQLResultTransformer<T> resultTransformer){
         return new ExceptionHandler<T, SQLException, AutoCloseable>().print(true)
-                .accept(() -> resultTransformer.apply(connection.prepareStatement(sql).executeQuery()));
+                .accept(() -> resultTransformer.transform(connection.prepareStatement(sql).executeQuery()));
     }
 
     public void enqeueAsync(String sql){
@@ -56,7 +57,7 @@ public class Database {
         asyncCommands.enque(() -> this.execute(sql));
     }
 
-    public void enqeueAsync(String sql, Consumer<ResultSet> consumer){
+    public void enqeueAsync(String sql, SQLResultConsumer consumer){
         if(!asyncCommands.isRunning()) startAsync();
         asyncCommands.enque(() ->  new ExceptionHandler<>().run(()-> consumer.accept(connection.prepareStatement(sql).executeQuery())));
     }

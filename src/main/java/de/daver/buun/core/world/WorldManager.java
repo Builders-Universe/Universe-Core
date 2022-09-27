@@ -13,10 +13,8 @@ public class WorldManager {
 
     private final Map<String, World> worlds;
     private final World template;
-    private final WorldGenerator standardGenerator;
 
     public WorldManager(WorldGenerator standardGenerator, Consumer<World> template){
-        this.standardGenerator = standardGenerator;
         this.template = new World("template", standardGenerator);
         template.accept(this.template);
         this.worlds = new HashMap<>();
@@ -24,7 +22,8 @@ public class WorldManager {
 
     public World create(String id, WorldGenerator generator){
         if(worlds.containsKey(id.toLowerCase())) return null;
-        World world = new World(id, generator);
+        World world = template.copy(id, generator);
+        if(!world.getGenerator().create()) return null;
         worlds.put(world.getId(), world);
         return world;
     }

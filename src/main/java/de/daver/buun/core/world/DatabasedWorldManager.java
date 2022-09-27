@@ -15,10 +15,14 @@ public class DatabasedWorldManager extends WorldManager{
     }
 
     public void loadWorlds(String tableName){
-
+        database.enqeueAsync("SELECT * FROM " + tableName);
+        //TODO ResultConsumer
     }
 
     public void createWorldsTable(String tableName){
-
+        database.enqeueAsync("CREATE TABLE IF NOT EXISTS" + tableName);
+        //TODO SQL command
     }
+
+
 }
