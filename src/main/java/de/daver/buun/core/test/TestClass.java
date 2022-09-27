@@ -133,7 +133,6 @@ public class TestClass {
 
     public void testTask(){
         DatabaseTaskManager manager = new DatabaseTaskManager(null, null);
-        manager.
     }
 
 

@@ -1,26 +1,22 @@
 package de.daver.buun.core.world;
 
-import de.daver.buun.core.warp.Warp;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
 public class WorldConfig {
 
-    private final List<Warp> warps;
     private final List<UUID> moderators;
     private final List<UUID> members;
     private UUID owner;
     private String name;
     private boolean blockUpdates;
     private boolean closed;
-    private Warp spawn;
+    private Location spawn;
 
     public WorldConfig(){
         this.moderators = new ArrayList<>();
         this.members = new ArrayList<>();
-        this.warps = new ArrayList<>();
     }
 
     public boolean addMember(UUID uuid){
@@ -63,7 +59,7 @@ public class WorldConfig {
         return this;
     }
 
-    public WorldConfig setSpawn(Warp spawn){
+    public WorldConfig setSpawn(Location spawn){
         this.spawn = spawn;
         return this;
     }
@@ -84,7 +80,7 @@ public class WorldConfig {
         return this.closed;
     }
 
-    public Warp getSpawn(){
+    public Location getSpawn(){
         return this.spawn;
     }
 
@@ -94,9 +90,5 @@ public class WorldConfig {
 
     public List<UUID> getModerators() {
         return moderators;
-    }
-
-    public List<Warp> getWarps() {
-        return warps;
     }
 }
