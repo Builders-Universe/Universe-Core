@@ -21,11 +21,13 @@ public class PropertiesFile extends ConfigFile{
     @Override
     protected Map<String, String> read() {
         Map<String, String> values = new LinkedHashMap<>();
+        //TODO Read File
         return values;
     }
 
     @Override
     public ConfigFile save() {
+        //TODO Write File
         return this;
     }
 

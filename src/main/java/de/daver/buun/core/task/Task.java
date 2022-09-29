@@ -116,7 +116,7 @@ public class Task {
         LOW,
         MEDIUM,
         HIGH,
-        URGENT;
+        URGENT
     }
 
     enum State{
@@ -125,7 +125,7 @@ public class Task {
         IN_PROGRESS,
         CONTROLING,
         FINISHED,
-        ARCHIVED;
+        ARCHIVED
     }
 
 }

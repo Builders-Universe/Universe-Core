@@ -7,8 +7,8 @@ import java.util.UUID;
 public class WorldStats {
 
     private long created;
-    private Map<UUID, Long> lastSeen;
-    private Map<UUID, Long> userTime;
+    private final Map<UUID, Long> lastSeen;
+    private final Map<UUID, Long> userTime;
 
     public WorldStats(){
         lastSeen = new HashMap<>();

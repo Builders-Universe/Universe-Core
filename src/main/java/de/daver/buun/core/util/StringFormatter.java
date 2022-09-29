@@ -1,6 +1,5 @@
 package de.daver.buun.core.util;
 
-import java.util.Locale;
 import java.util.function.UnaryOperator;
 
 public class StringFormatter {
