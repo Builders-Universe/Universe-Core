@@ -29,7 +29,7 @@ public class Result <T> {
         return this;
     }
 
-    public Result<T> elseCase(Runnable runnable){
+    public Result<T> notPresent(Runnable runnable){
         if(!isPresent()) runnable.run();
         return this;
 

@@ -46,8 +46,8 @@ public class FileHandler {
         return new FileCreator(this.file);
     }
 
-    public FileDeletor delete(){
-        return new FileDeletor(this.file);
+    public FileDeleter delete(){
+        return new FileDeleter(this.file);
     }
 
     public FileCopier copy(){

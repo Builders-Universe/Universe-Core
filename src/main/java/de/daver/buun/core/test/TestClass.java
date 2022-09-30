@@ -45,8 +45,8 @@ public class TestClass {
                 .overwrite(false)
                 .target("list/super.txt")
                 .execute()
-                .ifPresentHandler(FileHandler::delete)
-                .elseCase(() -> System.out.println("MEIN COCK"));
+                .ifPresentHandler(fileHandler -> fileHandler.writer().write("").save())
+                .notPresent(() -> System.out.println("MEIN COCK"));
 
         ConfigFile fileObject = new PropertiesFile(new File("PATH")).load();
         fileObject.get("");

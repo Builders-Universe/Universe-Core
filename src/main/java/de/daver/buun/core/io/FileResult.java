@@ -8,8 +8,6 @@ import java.util.function.Consumer;
 
 public class FileResult extends Result<File> {
 
-    public static final int TARGET_EXISTS = 1;
-
     public FileResult(File value, int code) {
         super(value, code);
     }

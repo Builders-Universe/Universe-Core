@@ -1,7 +1,7 @@
 package de.daver.buun.core.io.config;
 
 import de.daver.buun.core.io.handler.FileCreator;
-import de.daver.buun.core.io.handler.FileDeletor;
+import de.daver.buun.core.io.handler.FileDeleter;
 import de.daver.buun.core.io.handler.FileWriter;
 
 import java.io.File;
@@ -40,7 +40,7 @@ public abstract class ConfigFile {
     }
 
     public ConfigFile delete(){
-        new FileDeletor(file).execute();
+        new FileDeleter(file).execute();
         return this;
     }
 

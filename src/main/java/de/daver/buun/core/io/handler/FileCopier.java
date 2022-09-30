@@ -9,6 +9,8 @@ import java.io.FileOutputStream;
 
 public class FileCopier extends FileExecutor{
 
+    public static final int TARGET_EXISTS = 2;
+
     private File targetDir;
     private String copyName;
     private boolean deleteSource;
@@ -67,32 +69,31 @@ public class FileCopier extends FileExecutor{
     //
     @Override
     public FileResult execute(){
-        File target = new File(targetDir, getFile().getName());
-        if(!overwriteTarget && target.exists()) return new FileResult(target, FileResult.TARGET_EXISTS);
+        //TODO machen
         return null;
     }
 
 
-    private int writeFile(File source, File destination){
-        return new ExceptionHandler<Integer, Exception, AutoCloseable>()
-                .handleReturn(0) //TODO passendere Code finden
+    private boolean writeFile(File source, File destination){
+        return new ExceptionHandler<Boolean, Exception, AutoCloseable>()
+                .handleReturn(false)
                 .accept(() -> {
                     FileInputStream fileIn = new FileInputStream(source);
                     FileOutputStream fileOut = new FileOutputStream(destination);
                     byte[] buffer = new byte[1024];
                     int length;
                     while ((length = fileIn.read(buffer)) > 0) fileOut.write(buffer, 0, length);
-                    return 0; //TODO Success code
+                    return true;
                 });
     }
 
-    private void rCopyContents(File sourceFile, File targetDir){
-        final File[] newFile = new File[1];
-        new FileCreator(new File(targetDir, sourceFile.getName())).execute()
-                .ifPresent(file -> newFile[0] = file);
-        if(!sourceFile.isDirectory()) writeFile(sourceFile, newFile[0]);
+    private boolean rCopyContents(File sourceFile, File targetDir){
+        FileResult result = new FileCreator(new File(targetDir, sourceFile.getName())).execute();
+        if(!result.isPresent()) return false;
+        if(!sourceFile.isDirectory()) return writeFile(sourceFile, result.get());
         File[] contents = sourceFile.listFiles();
-        if(contents == null) return;
-        for(File file : contents) rCopyContents(file, newFile[0]);
+        if(contents == null) return true;
+        for(File file : contents) if(!rCopyContents(file, result.get())) return false;
+        return true;
     }
 }

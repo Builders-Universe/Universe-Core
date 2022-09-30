@@ -50,6 +50,14 @@ public class FileWriter {
         return this;
     }
 
+    public FileWriter writeLine(Object object){
+        return write(object).newLine();
+    }
+
+    public FileWriter writeLine(String line){
+        return write(line).newLine();
+    }
+
     public FileWriter write(List<String> lines){
         return write(lines, "\n");
     }

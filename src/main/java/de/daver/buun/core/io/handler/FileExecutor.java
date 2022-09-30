@@ -6,7 +6,10 @@ import java.io.File;
 
 public abstract class FileExecutor {
 
-    private final File file;
+    public static final int FAILED = 0;
+    public static final int SUCCESS = 1;
+
+    protected final File file;
 
     protected FileExecutor(File file){
         this.file = file;
