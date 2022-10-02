@@ -77,4 +77,15 @@ public class CommandChecks {
         return this;
     }
 
+    public boolean check(Command command, CommandArguments arguments, Sender sender){
+        for(CommandCheck check : this.checks.values()){
+            if(check.getCheck().check(command, arguments, sender)) continue;
+            BiConsumer<CommandArguments, Sender> fallBack = check.getFallBack();
+            if(fallBack == null) return false;
+            fallBack.accept(arguments, sender);
+            return false;
+        }
+        return true;
+    }
+
 }

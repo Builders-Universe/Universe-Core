@@ -27,4 +27,8 @@ public class CommandCheck {
         return this.check;
     }
 
+    public BiConsumer<CommandArguments, Sender> getFallBack(){
+        return this.fallBack;
+    }
+
 }
