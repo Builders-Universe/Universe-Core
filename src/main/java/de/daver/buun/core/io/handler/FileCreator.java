@@ -26,7 +26,7 @@ public class FileCreator extends FileExecutor{
             return new FileResult(file, SUCCESS);
         }
         File parent = file.getParentFile();
-        if(!parent.exists() && !parent.mkdirs()) return new FileResult(null, PARENT);
+        if(parent != null && !parent.exists() && !parent.mkdirs()) return new FileResult(null, PARENT);
         return new ExceptionHandler<FileResult, IOException, AutoCloseable>()
                 .handleReturn(new FileResult(null, FAILED))
                 .accept(() -> {
