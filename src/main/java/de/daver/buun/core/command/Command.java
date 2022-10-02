@@ -73,4 +73,11 @@ public class Command {
         return this.name;
     }
 
+    public CommandChecks getChecks(){
+        return this.checks;
+    }
+
+    public BiConsumer<Sender, CommandArguments> getAction(){
+        return this.action;
+    }
 }
