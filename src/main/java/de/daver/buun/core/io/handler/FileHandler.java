@@ -25,14 +25,14 @@ public class FileHandler {
         this(new File(path));
     }
 
-    public FileHandler rename(String name){
+    /*public FileHandler rename(String name){
         this.file = this.cut()
                 .target(file.getParentFile())
                 .name(name)
                 .execute()
                 .get();
         return this;
-    }
+    }*/
 
     public FileCopier cut(){
         return new FileCopier(this.file).removeSource();

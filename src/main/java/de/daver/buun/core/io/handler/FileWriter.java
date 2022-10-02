@@ -6,6 +6,7 @@ import de.daver.buun.core.io.BufferedFileWriter;
 import java.io.File;
 import java.util.List;
 import java.util.function.Consumer;
+import java.util.stream.Stream;
 
 public class FileWriter {
 
@@ -63,6 +64,10 @@ public class FileWriter {
     }
 
     public FileWriter write(List<String> lines, String separator){
+        return write(lines.stream(), separator);
+    }
+
+    public FileWriter write(Stream<String> lines, String separator){
         runBufferedWriter(writer -> new ExceptionHandler<>()
                 .print(true)
                 .run(() -> lines.forEach(line -> new ExceptionHandler<>()

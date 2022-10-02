@@ -12,18 +12,11 @@ public class FileCopier extends FileExecutor{
     public static final int TARGET_EXISTS = 2;
 
     private File targetDir;
-    private String copyName;
     private boolean deleteSource;
     private boolean overwriteTarget;
 
     protected FileCopier(File file){
         super(file);
-        this.copyName = null;
-    }
-
-    public FileCopier name(String name){
-        this.copyName = name;
-        return this;
     }
 
     public FileCopier target(File dir){
@@ -33,21 +26,6 @@ public class FileCopier extends FileExecutor{
 
     public FileCopier target(String dirPath){
         return target(new File(dirPath));
-    }
-
-    public FileCopier path(File dir, String name){
-        name(name);
-        return target(dir);
-    }
-
-    public FileCopier path(String path){
-        return path(path, "\\");
-    }
-
-    public FileCopier path(String path, String separator){
-        String[] split = path.split(separator);
-        name(split[split.length - 1]);
-        return target(path.substring(0, path.length() - separator.length() - this.copyName.length()));
     }
 
     public FileCopier removeSource(){
@@ -64,13 +42,15 @@ public class FileCopier extends FileExecutor{
         return this;
     }
 
-    //code return reason
-    //1    object existed
-    //
     @Override
     public FileResult execute(){
-        //TODO machen
-        return null;
+        if(this.targetDir.exists() && this.targetDir.listFiles() != null){
+            if(overwriteTarget) new FileDeleter(targetDir).execute();
+            else return new FileResult(null, 2);
+        }
+        if(!rCopyContents(file, targetDir)) return new FileResult(null, FAILED);
+        if(deleteSource) new FileDeleter(file).execute();
+        return new FileResult(new File(targetDir, file.getName()), SUCCESS);
     }
 
 

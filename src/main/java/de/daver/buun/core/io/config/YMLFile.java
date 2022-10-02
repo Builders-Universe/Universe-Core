@@ -10,8 +10,7 @@ public class YMLFile extends ConfigFile{
     }
 
     @Override
-    protected Map<String, String> read() {
-        return null;
+    protected void read() {
     }
 
     @Override

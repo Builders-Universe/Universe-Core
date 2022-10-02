@@ -5,52 +5,37 @@ import de.daver.buun.core.io.handler.FileDeleter;
 import de.daver.buun.core.io.handler.FileWriter;
 
 import java.io.File;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.function.Consumer;
 
 public abstract class ConfigFile {
 
-    private final File file;
-    protected Map<String, String> values;
+    protected static final String COMMENT_KEY = "=COMMENT=";
+
+    protected final File file;
+    protected final Map<String, String> values;
 
     protected ConfigFile(File file){
         this.file = file;
+        this.values = new LinkedHashMap<>();
     }
 
     protected ConfigFile(String path){
-        this.file = new File(path);
+        this(new File(path));
     }
 
     protected ConfigFile(File dir, String name){
-        this.file = new File(dir, name);
+        this(new File(dir, name));
     }
 
-    protected abstract Map<String, String> read();
+    protected abstract void read();
     public abstract ConfigFile save();
 
 
     public ConfigFile load(){
-        this.values = read();
-        return this;
-    }
-
-    public ConfigFile clear(){
-        this.values = null;
-        return this;
-    }
-
-    public ConfigFile delete(){
-        new FileDeleter(file).execute();
-        return this;
-    }
-
-    protected ConfigFile write(Consumer<FileWriter> writerConsumer){
-        writerConsumer.accept(new FileWriter(file));
-        return this;
-    }
-
-    public ConfigFile create(Consumer<FileCreator> writerConsumer){
-        writerConsumer.accept(new FileCreator(file));
+        this.values.clear();
+        this.read();
         return this;
     }
 
@@ -59,13 +44,7 @@ public abstract class ConfigFile {
         return this;
     }
 
-    public ConfigFile create(){
-        create(FileCreator::execute);
-        return this;
-    }
-
     public ConfigFile setString(String key, String value){
-        if(this.values == null) load().setString(key, value).save().clear();
         this.values.put(key, value);
         return this;
     }
@@ -80,20 +59,14 @@ public abstract class ConfigFile {
     }
 
     public ConfigFile addComment(String comment){
-        return set("=COMMENT=" + values.size(), comment);
+        return set(COMMENT_KEY + values.size(), comment);
     }
 
-    public String get(String key){
-        if(this.values == null) return read().get(key);
+    public String getString(String key){
         return this.values.get(key);
     }
 
-    public ConfigFile createDefault(Consumer<ConfigFile> configFileConsumer){
-        create(false);
-        load();
-        configFileConsumer.accept(this);
-        save();
-        clear();
-        return this;
+    public int getInt(String key){
+        return Integer.parseInt(getString(key));
     }
 }
