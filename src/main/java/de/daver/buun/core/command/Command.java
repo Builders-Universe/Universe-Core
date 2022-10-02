@@ -80,4 +80,17 @@ public class Command {
     public BiConsumer<Sender, CommandArguments> getAction(){
         return this.action;
     }
+
+    public CommandSuggestions getSuggestions(){
+        return this.suggestions;
+    }
+
+    public Command searchSubCommand(CommandArguments arguments){
+        if(arguments.getLength() < level + 1) return this;
+        for (Command subCommand : subCommands){
+            if(!arguments.getString(subCommand.level).equalsIgnoreCase(subCommand.name)) continue;
+            return searchSubCommand(arguments);
+        }
+        return this;
+    }
 }
