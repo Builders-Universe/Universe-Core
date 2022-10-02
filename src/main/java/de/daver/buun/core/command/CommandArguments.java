@@ -1,18 +1,13 @@
 package de.daver.buun.core.command;
 
-//TODO Fill Class
-public class CommandArguments {
+public interface CommandArguments {
 
-    public String getString(int index){
-        return null;
-    }
+    String getString(int index);
 
-    public int getLength(){
-        return 0;
-    }
+    int getLength();
 
-    public String[] toStringArray(){
-        return null;
-    }
+    String[] toStringArray();
+
+    String toLine();
 
 }

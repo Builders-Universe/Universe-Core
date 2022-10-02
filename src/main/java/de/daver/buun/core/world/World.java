@@ -21,12 +21,17 @@ public class World {
         this.stats = new WorldStats();
     }
 
+    //Copies the world but not the stats if you want to copy stats you have to do it manually
     public World copy(String id, WorldGenerator generator){
         World newWorld = new World(id, generator);
         return newWorld.modifyConfig(worldConfig ->  {
-            //TODO MODIFY CONFIG
-        }).modifyStats(worldStats ->  {
-            //TODO MODFIY STATS
+            worldConfig.blockUpdates(config.isBlockUpdates());
+            worldConfig.setClosed(config.isClosed());
+            worldConfig.setName(config.getName());
+            worldConfig.setSpawn(config.getSpawn());
+            worldConfig.setOwner(config.getOwner());
+            config.getMembers().forEach(worldConfig::addMember);
+            config.getModerators().forEach(worldConfig::addModerator);
         }).setLoaded(loaded);
     }
 

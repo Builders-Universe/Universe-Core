@@ -64,18 +64,16 @@ public class CommandChecks {
         return this;
     }
 
-    //TODO REFACTOR
     public CommandChecks checkCharacters(boolean enable){
         if(!enable){
             checks.remove(CHARACTERS);
             return this;
         }
-        addCheck(CHARACTERS, (command, arguments, sender) ->
-                Arrays.stream(arguments.toStringArray()).noneMatch(s -> {
-                    for (char c : forbiddenChars)
-                        for (char sC : s.toCharArray()) if (sC == c) return true;
-                    return false;
-                }));
+        addCheck(CHARACTERS, (command, arguments, sender) ->{
+                String argLine = arguments.toLine();
+                for (char c : forbiddenChars) if(argLine.indexOf(c) == - 1) return true;
+                return false;
+                });
         return this;
     }
 
