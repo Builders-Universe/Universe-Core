@@ -27,6 +27,7 @@ public class TaskManager {
     }
 
     public boolean addTask(Task task){
+        if(task == null) return false;
         if(contains(task.getId())) return false;
         tasks.put(task.getId(), task);
         return true;

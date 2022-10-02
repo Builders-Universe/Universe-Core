@@ -1,8 +1,9 @@
 package de.daver.buun.core.task;
 
 import de.daver.buun.core.sql.Database;
-import de.daver.buun.core.world.Location;
+import de.daver.buun.core.sql.SQLResultConsumer;
 
+import java.sql.ResultSet;
 import java.util.function.Consumer;
 
 public class DatabaseTaskManager extends TaskManager {
@@ -16,8 +17,12 @@ public class DatabaseTaskManager extends TaskManager {
 
     public void loadTasks(String tableName){
         database.enqeueAsync("SELECT * FROM " + tableName, set -> {
-            //TODO Transformer
+            SQLResultConsumer.iterateResult(set, result -> addTask(resultToTask(result)));
         });
+    }
+
+    private Task resultToTask(ResultSet result){
+        return new Task("");
     }
 
     public void createTaskTable(String tableName){
@@ -42,7 +47,7 @@ public class DatabaseTaskManager extends TaskManager {
         return true;
     }
 
-    public boolean modifyTask(String id, Consumer<Task> taskConsumer){
+    public boolean modify(String id, Consumer<Task> taskConsumer){
         Task task = getTask(id);
         if(task == null) return false;
         taskConsumer.accept(task);

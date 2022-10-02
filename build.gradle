@@ -4,7 +4,7 @@ plugins {
 }
 
 group 'de.daver.buun'
-version '1.0.0-alpha'
+version '1.0.1-alpha'
 
 publishing{
     publications{
@@ -12,7 +12,6 @@ publishing{
             groupId = 'de.daver.buun'
             artifactId = 'core'
             version = '1.0.0-alpha'
-
             from components.java
         }
     }

@@ -28,7 +28,7 @@ public class LanguageManager {
     public String getMessage(Locale language, String path){
         LanguageFile file = languageFiles.get(language);
         if(file == null) file = languageFiles.get(fallBack);
-        String value = file.get(path);
+        String value = file.getString(path);
         return (value == null) ? path : value;
     }
 

@@ -1,7 +1,5 @@
 package de.daver.buun.core.command;
 
-import de.daver.buun.core.command.provider.CommandProvider;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -20,7 +18,4 @@ public class CommandManager {
         commandMap.put(command.getName(), command);
         provider.register(command);
     }
-
-
-
 }

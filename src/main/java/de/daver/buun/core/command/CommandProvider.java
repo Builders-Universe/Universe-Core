@@ -1,4 +1,4 @@
-package de.daver.buun.core.command.provider;
+package de.daver.buun.core.command;
 
 import de.daver.buun.core.command.Command;
 import de.daver.buun.core.command.CommandArguments;
