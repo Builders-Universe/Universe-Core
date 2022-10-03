@@ -21,30 +21,35 @@ public class Database {
         this.asyncCommands = new SQLThread();
     }
 
-    public void startAsync(){
+    public Database startAsync(){
         asyncCommands.start();
+        return this;
     }
 
-    public void stopAsync(){
+    public Database stopAsync(){
         asyncCommands.stop();
         asyncCommands.clear();
+        return this;
     }
 
-    public void connect(){
-        if(this.connection != null) return;
+    public Database connect(){
+        if(this.connection != null) return this;
         connection = connector.createConnection();
+        return this;
     }
 
-    public void disconnect(){
-        if(this.connection == null) return;
+    public Database disconnect(){
+        if(this.connection == null) return this;
         new ExceptionHandler<>().print(true).run(connection::close);
         connection = null;
         asyncCommands.stop();
+        return this;
     }
 
-    public void execute(String sql){
+    public Database execute(String sql){
         new ExceptionHandler<>().print(true)
                 .run(() -> connection.prepareStatement(sql).execute());
+        return this;
     }
 
     public <T> T executeQuery(String sql, SQLResultTransformer<T> resultTransformer){
@@ -52,14 +57,16 @@ public class Database {
                 .accept(() -> resultTransformer.transform(connection.prepareStatement(sql).executeQuery()));
     }
 
-    public void enqeueAsync(String sql){
+    public Database enqeueAsync(String sql){
         if(!asyncCommands.isRunning()) startAsync();
         asyncCommands.enque(() -> this.execute(sql));
+        return this;
     }
 
-    public void enqeueAsync(String sql, SQLResultConsumer consumer){
+    public Database enqeueAsync(String sql, SQLResultConsumer consumer){
         if(!asyncCommands.isRunning()) startAsync();
         asyncCommands.enque(() ->  new ExceptionHandler<>().run(()-> consumer.accept(connection.prepareStatement(sql).executeQuery())));
+        return this;
     }
 
     public SQLThread getThread(){

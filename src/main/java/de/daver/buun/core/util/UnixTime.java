@@ -15,6 +15,7 @@ public class UnixTime {
     public UnixTime(){
         this.millis = System.currentTimeMillis();
     }
+
     public long getDays() {
         return getHours() / 24;
     }
