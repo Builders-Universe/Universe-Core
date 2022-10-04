@@ -50,7 +50,7 @@ public class Logger {
 
     public Logger createLogFile(UnaryOperator<LogFile> logFileOperator){
         LogFile file = new LogFile(this.root);
-        logFileOperator.apply(file);
+        if(logFileOperator != null) logFileOperator.apply(file);
         file.create();
         return this;
     }
