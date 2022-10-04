@@ -14,10 +14,6 @@ public class Logger {
     private final List<LogFile> logFiles;
     private final File root;
 
-    public Logger(){
-        this(new File("\"")); //CHeck if this is the root dir;
-    }
-
     public Logger(File root){
         logListeners = new ArrayList<>();
         this.logFiles = new ArrayList<>();
@@ -57,6 +53,16 @@ public class Logger {
         logFileOperator.apply(file);
         file.create();
         return this;
+    }
+
+    public Logger printConsole(){
+        addListener((channel, type, message) -> System.out.println(format(channel, type, message)));
+        return this;
+    }
+
+    public String format(String channel, String type, String message){
+        if(channel == null) return "[" + type + "]:  " + message;
+        return "[" + channel + "][" + type + "]:  " + message;
     }
 
 
