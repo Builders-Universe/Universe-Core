@@ -8,7 +8,10 @@ import java.time.format.DateTimeFormatter;
 
 public class LogFile {
 
-    private static final String TIME_PLACEHOLDER = "<time>";
+    public static final String TIME = "<time>";
+    public static final String CHANNEL = "<channel>";
+    public static final String TYPE = "<type>";
+    public static final String MESSAGE = "<message>";
 
     private String logPattern;
     private String format;
@@ -21,7 +24,7 @@ public class LogFile {
         this.dir = dir;
         this.channel = null;
         this.logPattern = "[<time>][<type>]:  <message>";
-        this.format = TIME_PLACEHOLDER;
+        this.format = TIME;
         this.timePattern = "yy-MM-dd";
     }
 
@@ -48,15 +51,19 @@ public class LogFile {
 
     public LogFile create(){
         String time = LocalDateTime.now().format(DateTimeFormatter.ofPattern(timePattern));
-        String name = format.replace(TIME_PLACEHOLDER, time).replace("<channel>", this.channel);
+        String name = format.replace(TIME, time)
+                .replace(CHANNEL, (this.channel == null) ? "" : this.channel);
         new FileHandler(dir,  name + ".log").create().overwrite(false).execute();
         fileName = name + ".log";
         return this;
     }
 
-    public LogFile write(String type, String message){
+    public LogFile write(String channel, String type, String message){
         String time = LocalDateTime.now().format(DateTimeFormatter.ofPattern(timePattern));
-        String logMessage = logPattern.replace(TIME_PLACEHOLDER, time).replace("<type>", type).replace("<message>", message);
+        String logMessage = logPattern.replace(TIME, time)
+                .replace(TYPE, type)
+                .replace(MESSAGE, message)
+                .replace(CHANNEL, channel);
         new FileHandler(dir, fileName).writer().write(logMessage).save(true);
         return this;
     }

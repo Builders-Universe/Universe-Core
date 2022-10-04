@@ -36,7 +36,7 @@ public class Logger {
         logFiles.stream()
                 .filter(logFile -> logFile.getChannel() == null
                         || logFile.getChannel().equals(channel))
-                .forEach(logFile -> logFile.write(type, message));
+                .forEach(logFile -> logFile.write(channel, type, message));
         return this;
     }
 
@@ -44,7 +44,7 @@ public class Logger {
         logListeners.forEach(listener -> listener.apply(null, type, message));
         logFiles.stream()
                 .filter(logFile -> logFile.getChannel() == null)
-                .forEach(logFile -> logFile.write(type, message));
+                .forEach(logFile -> logFile.write(null, type, message));
         return this;
     }
 
