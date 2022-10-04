@@ -13,9 +13,10 @@ public class CommandManager {
         this.provider = provider;
     }
 
-    public void register(Command command){
-        if(commandMap.containsKey(command.getName())) return;
+    public CommandManager register(Command command){
+        if(commandMap.containsKey(command.getName())) return this;
         commandMap.put(command.getName(), command);
         provider.register(command);
+        return this;
     }
 }

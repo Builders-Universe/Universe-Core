@@ -10,7 +10,7 @@ public class LanguageManager {
     private final Map<Locale, LanguageFile> languageFiles;
     private final File root;
     private final Locale fallBack;
-    private final List<String> defaultPaths;
+    private final Map<String, String> defaults;
 
     public LanguageManager(Locale fallBack){
         this(null, fallBack);
@@ -22,7 +22,7 @@ public class LanguageManager {
                 new FileHandler(root).create().overwrite(false).execute().get(); //Check if its null the root dir was chosen
         this.languageFiles = new HashMap<>();
         createLanguage(fallback);
-        this.defaultPaths = new ArrayList<>();
+        this.defaults = new LinkedHashMap<>();
     }
 
     public String getMessage(Locale language, String path){
@@ -44,15 +44,16 @@ public class LanguageManager {
         return new MessageProcessor(getMessage(language, path));
     }
 
-    public LanguageManager addDefault(String...paths){
-        if(paths.length == 1) defaultPaths.add(paths[0]);
-        else defaultPaths.addAll(Arrays.asList(paths));
+    public LanguageManager addDefault(String path, String...fields){
+        StringBuilder value = new StringBuilder();
+        for(String field : fields) value.append("<").append(field).append(">");
+        defaults.put(path, value.toString());
         return this;
     }
 
     public LanguageManager saveDefaults(){
         languageFiles.values().forEach(languageFile -> {
-            defaultPaths.forEach(path -> languageFile.setDefault(path, null));
+            defaults.forEach(languageFile::setDefault);
             languageFile.save();
         });
         return this;

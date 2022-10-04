@@ -41,13 +41,15 @@ public class Command {
         if(subCommands == null) subCommands = new ArrayList<>();
         subCommands.add(command);
         command.level = level + 1;
+        if(command.meta.getPermission() != null) return this;
+        command.setMeta(commandMeta -> commandMeta.setPermission(meta.getPermission() + "." + command.name));
         return this;
     }
 
     public Command createSubCommand(String name, Consumer<Command> commandConsumer){
         Command subCommand = new Command(name);
-        commandConsumer.accept(subCommand);
         addSubCommand(subCommand);
+        commandConsumer.accept(subCommand);
         return this;
     }
 
