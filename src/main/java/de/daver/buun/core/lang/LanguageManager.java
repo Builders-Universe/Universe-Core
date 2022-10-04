@@ -46,7 +46,7 @@ public class LanguageManager {
 
     public LanguageManager addDefault(String path, String...fields){
         StringBuilder value = new StringBuilder();
-        for(String field : fields) value.append("<").append(field).append(">");
+        if(fields != null) for(String field : fields) value.append("<").append(field).append(">");
         defaults.put(path, value.toString());
         return this;
     }
