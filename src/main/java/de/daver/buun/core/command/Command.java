@@ -87,6 +87,10 @@ public class Command {
         return this.suggestions;
     }
 
+    public List<Command> getSubCommands(){
+        return this.subCommands;
+    }
+
     public Command searchSubCommand(CommandArguments arguments){
         if(arguments.getLength() < level + 1) return this;
         for (Command subCommand : subCommands){

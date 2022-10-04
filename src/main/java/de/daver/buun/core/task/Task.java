@@ -112,14 +112,14 @@ public class Task {
         return this.location;
     }
 
-    enum Priority{
+    public enum Priority{
         LOW,
         MEDIUM,
         HIGH,
         URGENT
     }
 
-    enum State{
+    public enum State{
         CREATING,
         UNASSIGNED,
         IN_PROGRESS,
