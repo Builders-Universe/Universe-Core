@@ -7,7 +7,7 @@ import java.util.function.Consumer;
 
 public class Command {
 
-    private BiConsumer<Sender, CommandArguments> action;
+    private CommandAction action;
     private final CommandMeta meta;
     private final CommandChecks checks;
     private final String name;
@@ -53,7 +53,7 @@ public class Command {
         return this;
     }
 
-    public Command setAction(BiConsumer<Sender, CommandArguments> action){
+    public Command setAction(CommandAction action){
         this.action = action;
         return this;
     }
@@ -79,7 +79,7 @@ public class Command {
         return this.checks;
     }
 
-    public BiConsumer<Sender, CommandArguments> getAction(){
+    public CommandAction getAction(){
         return this.action;
     }
 
