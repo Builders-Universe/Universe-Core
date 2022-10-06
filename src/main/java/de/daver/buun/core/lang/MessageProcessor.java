@@ -1,6 +1,6 @@
 package de.daver.buun.core.lang;
 
-import de.daver.buun.core.command.Sender;
+import de.daver.buun.core.command.sender.Sender;
 import de.daver.buun.core.util.StringFormatter;
 
 import java.util.List;

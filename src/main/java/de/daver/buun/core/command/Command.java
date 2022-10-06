@@ -1,8 +1,9 @@
 package de.daver.buun.core.command;
 
+import de.daver.buun.core.command.function.CommandAction;
+
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
 public class Command {
@@ -20,6 +21,7 @@ public class Command {
         this.meta = new CommandMeta();
         this.suggestions = new CommandSuggestions();
         this.name = name;
+        if(this instanceof CommandAction) action = (CommandAction) this;
     }
 
     public Command setMeta(Consumer<CommandMeta> metaConsumer){

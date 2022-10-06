@@ -1,4 +1,4 @@
-package de.daver.buun.core.command;
+package de.daver.buun.core.command.sender;
 
 import java.util.Locale;
 

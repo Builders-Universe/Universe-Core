@@ -15,19 +15,21 @@ public class DatabaseTaskManager extends TaskManager {
         this.database = database;
     }
 
-    public void loadTasks(String tableName){
+    public DatabaseTaskManager loadTasks(String tableName){
         database.enqeueAsync("SELECT * FROM " + tableName, set -> {
             SQLResultConsumer.iterateResult(set, result -> addTask(resultToTask(result)));
         });
+        return this;
     }
 
     private Task resultToTask(ResultSet result){
         return new Task("");
     }
 
-    public void createTaskTable(String tableName){
+    public DatabaseTaskManager createTaskTable(String tableName){
         database.execute("CREATE TABLE IF NOT EXISTS " + tableName + "");
         //TODO SQL Command
+        return this;
     }
 
     @Override

@@ -1,5 +1,8 @@
 package de.daver.buun.core.command;
 
+import de.daver.buun.core.command.function.CommandPredicate;
+import de.daver.buun.core.command.sender.Sender;
+
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
